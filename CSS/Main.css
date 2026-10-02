@@ -1,0 +1,449 @@
+#main_box {
+	flex: 1;
+	min-width: 0;
+}
+
+#page {
+	position: relative;
+	margin-top: 0;
+	padding-left: 72px;
+	padding-right: 16px;
+	display: flex;
+	gap: 20px;
+}
+
+a {
+	text-decoration: none;
+}
+body{
+	margin: 0;
+	padding-top: 50px;
+	background-color: #F1F8F2;
+	font-family: cursive, "KaiTi", "楷体", serif;
+}
+
+#app_shell[hidden],
+#auth_screen[hidden] {
+	display: none !important;
+}
+
+.auth_screen {
+	position: fixed;
+	inset: 0;
+	z-index: 2000;
+	display: grid;
+	place-items: center;
+	padding: 24px;
+	box-sizing: border-box;
+	background: #eaf5ec;
+}
+
+.auth_card {
+	width: min(100%, 390px);
+	padding: 34px;
+	box-sizing: border-box;
+	border: 1px solid #b7ddba;
+	border-radius: 16px;
+	background: #f9fcf9;
+	box-shadow: 0 12px 34px rgba(49, 92, 56, .12);
+}
+
+.auth_brand {
+	color: #43a047;
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: .16em;
+}
+
+.auth_card > h1 {
+	display: block;
+	margin: 10px 0 4px;
+	padding: 0;
+	color: #315c38;
+	font-size: 27px;
+}
+
+.auth_card > p {
+	margin: 0 0 22px;
+	color: #718674;
+	font-size: 14px;
+}
+
+.auth_tabs {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 5px;
+	margin-bottom: 20px;
+	padding: 4px;
+	border-radius: 9px;
+	background: #eaf5ec;
+}
+
+.auth_tabs button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 36px;
+	border: 0;
+	border-radius: 7px;
+	background: transparent;
+	color: #52745a;
+}
+
+.auth_tabs button.active {
+	background: #fff;
+	color: #237627;
+	box-shadow: 0 1px 4px rgba(35, 55, 39, .12);
+}
+
+#auth_form label {
+	display: block;
+	margin: 12px 0 6px;
+	color: #416b47;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+#auth_form input {
+	width: 100%;
+	height: 44px;
+	padding: 10px 12px;
+}
+
+.auth_field_status {
+	display: block;
+	min-height: 17px;
+	margin-top: 4px;
+	color: #a65e5e;
+	font-size: 12px;
+}
+
+.auth_field_status.available { color: #34813e; }
+
+.auth_error {
+	min-height: 18px;
+	margin: 10px 0 8px !important;
+	color: #a64242 !important;
+	font-size: 13px !important;
+}
+
+.auth_submit {
+	width: 100%;
+	min-height: 42px;
+	border: 0;
+	border-radius: 8px;
+	background: #43a047;
+	color: white;
+	font-size: 16px;
+}
+
+.auth_submit:hover { background: #34813e; }
+
+.account_controls {
+	margin-left: auto;
+	padding-right: 16px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	font-size: 13px;
+	color: #315c38;
+}
+
+.account_controls button {
+	padding: 5px 10px;
+	border: 1px solid rgba(49, 92, 56, .25);
+	border-radius: 7px;
+	background: rgba(255, 255, 255, .45);
+	color: #315c38;
+}
+
+.account_menu_wrap {
+	position: relative;
+}
+
+.account_controls .account_menu_btn {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	max-width: 220px;
+	padding: 7px 10px;
+	border-color: transparent;
+	background: transparent;
+	cursor: pointer;
+}
+
+.account_menu_chevron {
+	font-size: 12px;
+}
+
+.account_menu {
+	position: absolute;
+	top: calc(100% + 7px);
+	right: 0;
+	z-index: 1100;
+	width: 190px;
+	padding: 6px;
+	border: 1px solid #d5e5d7;
+	border-radius: 10px;
+	background: #fff;
+	box-shadow: 0 6px 18px rgba(35, 55, 39, .16);
+}
+
+.account_menu[hidden] {
+	display: none;
+}
+
+.account_controls .account_menu button {
+	display: block;
+	width: 100%;
+	padding: 9px 10px;
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	color: #315c38;
+	font-size: 14px;
+	text-align: left;
+}
+
+.account_controls .account_menu button:hover {
+	background: #eaf5ec;
+}
+
+.account_controls .account_menu #signout_btn {
+	color: #a64242;
+}
+
+.account_controls .account_menu #signout_btn:hover {
+	background: #fbefef;
+}
+
+.account_settings_window {
+	display: flex;
+	flex-direction: column;
+	width: 500px;
+	max-width: calc(100vw - 24px);
+	max-height: 90vh;
+	padding: 14px 20px 20px;
+	overflow: hidden;
+}
+
+.account_settings_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.account_settings_header h2 {
+	margin: 0;
+}
+
+.account_settings_close {
+	display: grid;
+	flex: 0 0 36px;
+	width: 34px;
+	height: 36px;
+	padding: 0;
+	border: 1px solid #b7ddba;
+	border-radius: 9px;
+	background: #fff;
+	color: #52745a;
+	font-family: sans-serif;
+	font-size: 22px;
+	line-height: 1;
+	place-items: center;
+	transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+.account_settings_close:hover {
+	border-color: #9bcba0;
+	background: #eaf5ec;
+	color: #237627;
+}
+
+.account_settings_close:active {
+	transform: scale(.95);
+}
+
+.account_settings_close:focus-visible {
+	outline: 2px solid #43a047;
+	outline-offset: 2px;
+}
+
+.account_settings_close .symbol_icon {
+	width: 16px;
+	height: 16px;
+}
+
+.account_settings_scroll_wrap {
+	display: flex;
+	flex: 1 1 auto;
+	min-height: 0;
+	gap: 7px;
+}
+
+.account_settings_scroll_area {
+	flex: 1 1 auto;
+	min-width: 0;
+	min-height: 0;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	scrollbar-width: none;
+}
+
+.account_settings_scroll_area::-webkit-scrollbar {
+	display: none;
+}
+
+.account_settings_scrollbar {
+	position: relative;
+	flex: 0 0 5px;
+	width: 5px;
+	min-height: 0;
+	border: 0;
+	background: transparent;
+}
+
+.account_settings_scrollbar[hidden] {
+	display: none;
+}
+
+.account_settings_scroll_thumb {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 5px;
+	border: 0;
+	border-radius: 5px;
+	background: #cfe8d2;
+	cursor: pointer;
+	touch-action: none;
+}
+
+.account_settings_scroll_thumb:hover {
+	background: #bfdcc3;
+}
+
+.account_settings_section {
+	padding: 10px 0 18px;
+	border-bottom: 1px solid #e2ece3;
+}
+
+.account_settings_section:last-child {
+	border-bottom: 0;
+}
+
+.account_settings_section h3 {
+	margin: 8px 0 10px;
+	color: #315c38;
+	font-size: 17px;
+}
+
+.account_settings_section .create_btn,
+.account_settings_section .delete_btn {
+	margin-left: auto;
+}
+
+.account_settings_message {
+	min-height: 18px;
+	margin: 8px 0;
+	color: #a64242;
+	font-size: 13px;
+}
+
+.account_danger_section > p:not(.account_settings_message) {
+	margin: 0;
+	color: #718674;
+	font-size: 13px;
+}
+
+.account_settings_section .delete_btn {
+	background: #f4c7c7;
+}
+
+.account_settings_section .delete_btn:hover {
+	background: #efb5b5;
+}
+
+@media (max-width: 480px) {
+	.auth_card { padding: 26px 22px; }
+	.account_controls { gap: 6px; padding-right: 8px; }
+	.account_controls .account_menu_btn { max-width: 150px; }
+	#signed_in_username { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+h1 {
+	padding-left: 10px;
+	margin: 0px;
+	color: #43A047;
+	font-size: 30px;
+	font-family: cursive, "KaiTi", "楷体", serif;
+	display: inline-block;
+	vertical-align: middle;
+}
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	background-color: #A5D6A7;
+}
+button {
+	font-family: cursive, "KaiTi", "楷体", serif;
+	cursor: pointer;
+}
+
+.symbol_icon {
+	display: block;
+	width: 18px;
+	height: 18px;
+	pointer-events: none;
+}
+input:not([type="hidden"]):not([type="checkbox"]),
+textarea,
+select {
+	font-family: cursive, "KaiTi", "楷体", serif;
+	background-color: #fff;
+	border: 2px solid #b7ddba;
+	border-radius: 8px;
+	color: #2f6b3c;
+	box-sizing: border-box;
+}
+
+select {
+	appearance: none;
+	-webkit-appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='m3 5 4 4 4-4' fill='none' stroke='%232f6b3c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 12px center;
+	background-size: 14px;
+	padding-right: 36px;
+}
+
+select option {
+	border: 0;
+	background-color: #fff;
+	color: #2f6b3c;
+}
+
+input:not([type="hidden"]):not([type="checkbox"]),
+select {
+	height: 40px;
+	padding: 10px;
+}
+input:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+	box-shadow: none;
+}
+#home {
+	height: 30px;
+	width: 30px;
+	padding: 10px;
+	display: inline-block;
+	vertical-align: middle;
+}

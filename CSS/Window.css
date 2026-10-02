@@ -1,0 +1,87 @@
+.window_box {
+	position: fixed;
+	z-index: 2000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+.window {
+	width: 500px;
+	background-color: #f8fff9;
+	padding: 25px;
+	border-radius: 20px;
+	box-sizing: border-box;
+}
+.window > h2 {
+	font-size: 25px;
+	color: #237627;
+	margin-top: 0px;
+}
+.window_input{
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+}
+.btns_wrap {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+}
+.create_btn,
+.delete_btn,
+.cancel_btn {
+	height: 40px;
+	padding: 10px 16px;
+	border-radius: 8px;
+	font-size: 17px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+}
+.create_btn {
+	border: 3px solid #81C784;
+	background-color: #A5D6A7;
+	color: #FFFFFF;
+}
+.delete_btn {
+	background-color: #F4C7C7;
+	color: #D95C5C;
+	border: 3px solid #E8A8A8;
+}
+.cancel_btn {
+	border: 3px solid #A8A8A8;
+	background-color: #C8C8C8;
+	color: #777777;
+}
+.create_btn:hover {
+    background-color: #81C784;
+}
+.delete_btn:hover {
+	background-color: #EFB5B5;
+}
+.cancel_btn:hover {
+    background-color: #b0b0b0;
+}
+.error {
+	color: #dc2626;
+	font-size: 15px;
+	display: block;
+	margin-bottom: 15px;
+}
+
+
+#nt_error {
+
+	font-weight: normal;
+}
+#nt_btns {
+	margin-top: 40px;
+}
+#al_window > h2{
+	color: #f07979;
+}

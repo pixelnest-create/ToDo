@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>To Do</title>
+		<link rel="stylesheet" type="text/css" href="CSS/Main.css">
+		<link rel="stylesheet" type="text/css" href="CSS/Left.css">
+		<link rel="stylesheet" type="text/css" href="CSS/Task Display.css">
+		<link rel="stylesheet" type="text/css" href="CSS/Window.css">
+		<link rel="stylesheet" type="text/css" href="CSS/Menu.css">
+		<link rel="stylesheet" type="text/css" href="CSS/Calendar.css">
+		<link rel="stylesheet" type="text/css" href="CSS/Memo.css">
+	</head>
+	<body>
+		<section id="auth_screen" class="auth_screen" aria-labelledby="auth_title">
+			<div class="auth_card">
+				<div class="auth_brand">TO DO</div>
+				<h1 id="auth_title">Welcome back</h1>
+				<p id="auth_hint">Sign in to continue to your workspace.</p>
+				<div class="auth_tabs" role="tablist" aria-label="Account access">
+					<button id="auth_signin_tab" class="active" type="button" role="tab" aria-selected="true">Sign In</button>
+					<button id="auth_signup_tab" type="button" role="tab" aria-selected="false">Sign Up</button>
+				</div>
+				<form id="auth_form" novalidate>
+					<label for="auth_username">Username</label>
+					<input id="auth_username" type="text" minlength="3" maxlength="24" autocomplete="username" required>
+					<span id="auth_username_status" class="auth_field_status" aria-live="polite"></span>
+					<label for="auth_password">Password</label>
+					<input id="auth_password" type="password" minlength="8" autocomplete="current-password" required>
+					<div id="auth_confirm_wrap" hidden>
+						<label for="auth_confirm_password">Confirm password</label>
+						<input id="auth_confirm_password" type="password" minlength="8" autocomplete="new-password">
+					</div>
+					<p id="auth_error" class="auth_error" aria-live="polite"></p>
+					<button id="auth_submit" class="create_btn auth_submit" type="submit">Sign In</button>
+				</form>
+			</div>
+		</section>
+		<div id="app_shell" hidden>
+		<header>
+			<img id="home" src="Images/checkbox-icon.svg" alt="" aria-hidden="true">
+			<h1>TO DO</h1>
+			<div class="account_controls">
+				<div class="account_menu_wrap">
+					<button id="account_menu_btn" class="account_menu_btn" type="button" aria-haspopup="true" aria-expanded="false">
+						<span id="signed_in_username"></span><span class="account_menu_chevron" aria-hidden="true">▾</span>
+					</button>
+					<div id="account_menu" class="account_menu" hidden>
+						<button id="account_settings_btn" type="button">Account settings</button>
+						<button id="signout_btn" type="button">Sign out</button>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div id="page">
+			<nav id="feature_bar" aria-label="Main views">
+				<button id="list_btn" class="feature_nav_btn active" type="button" aria-label="Tasks" aria-pressed="true">
+					<span class="feature_nav_icon" aria-hidden="true">☷</span>
+				</button>
+				<button id="calendar_btn" class="feature_nav_btn" type="button" aria-label="Calendar" aria-pressed="false">
+					<span class="feature_nav_icon" aria-hidden="true">▦</span>
+				</button>
+				<button id="events_btn" class="feature_nav_btn" type="button" aria-label="Events" aria-pressed="false">
+					<span class="feature_nav_icon" aria-hidden="true">◷</span>
+				</button>
+				<button id="memo_btn" class="feature_nav_btn" type="button" aria-label="Memos" aria-pressed="false">
+					<span class="feature_nav_icon" aria-hidden="true">▤</span>
+				</button>
+			</nav>
+			<div id="left_box">
+				<div class="groups_sidebar_heading">
+					<h2>Groups</h2>
+					<button id="groups_new_btn" type="button" aria-label="Add group" title="Add group"><img class="symbol_icon" src="Images/icon-plus.svg" alt="" aria-hidden="true"></button>
+				</div>
+				<div id="group_list">	
+				</div>
+			</div>
+			<aside id="favorites_sidebar" hidden>
+				<div class="events_sidebar_heading">
+					<h2>Favorites</h2>
+				</div>
+				<div id="favorite_events_list"></div>
+			</aside>
+			<aside id="events_sidebar" hidden>
+				<div class="events_sidebar_heading">
+					<h2>Coming Up</h2>
+					<button id="view_all_events_btn" type="button">View all events</button>
+				</div>
+				<div id="recent_events_list"></div>
+			</aside>
+			<aside id="memos_sidebar" class="memos_sidebar" hidden aria-label="Memo list">
+				<div class="events_sidebar_heading">
+					<h2>Memos</h2>
+					<button id="memo_new_btn" type="button" aria-label="New memo" title="New memo"><img class="symbol_icon" src="Images/icon-plus.svg" alt="" aria-hidden="true"></button>
+				</div>
+				<div id="memo_list" class="memo_list"></div>
+			</aside>
+			<div id="main_box">
+				<div id="main_head">
+					<h1 id="main_title">All Tasks</h1>
+					<div id="calendar_header" hidden>
+						<button id="mpre_btn" type="button" aria-label="Previous month">&lt;</button>
+						<h2 id="month_title"></h2>
+						<button id="mnext_btn" type="button" aria-label="Next month">&gt;</button>
+					</div>
+					<div class="events_period_switch" role="tablist" aria-label="Event period" hidden>
+						<button id="upcoming_events_btn" class="events_period_btn active" type="button" role="tab" aria-selected="true">Coming Up</button>
+						<button id="past_events_btn" class="events_period_btn" type="button" role="tab" aria-selected="false">Past</button>
+					</div>
+					<div class="menu_wrap">
+					<button id="new_btn" title="New" aria-label="New"><img class="symbol_icon" src="Images/icon-plus.svg" alt="" aria-hidden="true"></button>
+						<div id="new_menu" class="menu_box">
+						<div id="nt_btn" class="menu_choice">New Task</div>
+						<div id="new_event_btn" class="menu_choice">New Event</div>
+						<div id="ng_btn" class="menu_choice">New Group</div>
+						</div>
+					</div>
+				</div>
+				<div id="task_scroll_area">
+					<div id="tasks_box"></div>
+					<div id="tasks_empty_state" hidden>
+						<p>No tasks yet</p>
+						<button id="empty_add_task_btn" type="button">Add task</button>
+					</div>
+					<div id="task_scrollbar" aria-hidden="true"><div id="task_scroll_thumb"></div></div>
+				</div>
+				<div id="calendar_box">
+					<div id="calendar_grid"></div>
+				</div>
+				<div id="events_box" hidden>
+					<div class="events_view_body">
+						<div id="event_timeline" class="event_timeline"></div>
+					</div>
+				</div>
+				<section id="memo_box" class="memo_editor_panel" hidden aria-label="Memo editor">
+					<div class="memo_editor">
+						<div class="memo_editor_header">
+							<span id="memo_updated_label" class="memo_updated_label"></span>
+							<button id="memo_delete_btn" class="memo_delete_btn" type="button" hidden>Delete</button>
+						</div>
+						<input id="memo_title_input" class="memo_title_input" type="text" placeholder="Title" aria-label="Memo title" disabled>
+						<div class="memo_body_scroll_wrap">
+							<div id="memo_body_scroll_area" class="memo_body_scroll_area">
+								<div id="memo_content_input" class="memo_content_input" role="textbox" aria-label="Memo content" aria-multiline="true" contenteditable="false" data-placeholder="Write a memo..."></div>
+							</div>
+							<div id="memo_scrollbar" class="memo_scrollbar" aria-hidden="true"><div id="memo_scroll_thumb" class="memo_scroll_thumb"></div></div>
+						</div>
+						<div id="memo_empty_state" class="memo_empty_state">Select a memo or create a new one.</div>
+					</div>
+				</section>
+			</div>
+			<div id="nt_box" class="window_box">
+				<div id="nt_window" class="window form_window" role="dialog" aria-modal="true" aria-labelledby="nt_title">
+					<h2 id="nt_title">New Task</h2>
+					<label class="modal_label" for="nt_input">Task name</label>
+					<input type="text" id="nt_input" placeholder="What needs to be done?" class="window_input">
+					<span id="nt_error" class="error"> </span>
+					<label class="modal_label" for="due_display">Due date <span class="optional_label">(optional)</span></label>
+					<div class="date_field">
+						<input type="text" id="due_display" class="window_input date_display" placeholder="Choose a date" readonly>
+						<input type="hidden" id="due_input">
+						<button id="due_picker_btn" class="date_picker_trigger" type="button" aria-label="Choose due date">▦</button>
+					</div>
+					<div id="nt_btns" class="btns_wrap modal_btns">
+						<button id="ntcancel_btn" class="cancel_btn">Cancel</button>
+						<button id="ntcreate_btn" class="create_btn">Add</button>
+					</div>
+				</div>
+			</div>
+			<div id="ng_box" class="window_box">
+				<div id="ng_window" class="window form_window" role="dialog" aria-modal="true" aria-labelledby="ng_title">
+					<h2 id="ng_title">New Group</h2>
+					<label class="modal_label" for="ng_input">Group name</label>
+					<input type="text" id="ng_input" placeholder="Group name" class="window_input">
+					<span id="ng_error" class="error"> </span>
+					<div class="btns_wrap modal_btns">
+						<button id="ngcancel_btn" class="cancel_btn">Cancel</button>
+						<button id="ngcreate_btn" class="create_btn">Create Group</button>
+					</div>
+				</div>
+			</div>
+			<div id="event_box" class="window_box">
+				<div class="window event_window" role="dialog" aria-modal="true" aria-labelledby="event_title">
+					<h2 id="event_title">New Event</h2>
+					<label class="modal_label" for="event_name_input">Event name</label>
+					<input type="text" id="event_name_input" placeholder="Event name" class="window_input">
+					<label class="modal_label" for="event_type_input">Event type</label>
+					<select id="event_type_input" class="window_input event_type_select">
+						<option value="Activity">Activity</option>
+						<option value="Holiday">Holiday</option>
+						<option value="Day off">Day off</option>
+						<option value="__custom__">Custom type…</option>
+					</select>
+					<input type="text" id="event_custom_type_input" placeholder="Enter a custom type" class="window_input event_custom_type" maxlength="30" hidden>
+					<label class="modal_label" for="event_date_display">Date</label>
+					<div class="date_field">
+						<input type="text" id="event_date_display" class="window_input date_display" placeholder="Choose a date" readonly>
+						<input type="hidden" id="event_date_input">
+						<button id="event_date_picker_btn" class="date_picker_trigger" type="button" aria-label="Choose event date">▦</button>
+					</div>
+					<div class="event_time_row">
+						<div>
+							<label class="modal_label" for="event_start_input">Start time</label>
+							<select id="event_start_input" class="time_select window_input"></select>
+						</div>
+						<div>
+							<label class="modal_label" for="event_end_input">End time</label>
+							<select id="event_end_input" class="time_select window_input"></select>
+						</div>
+					</div>
+					<label class="modal_label" for="event_notes_input">Notes</label>
+					<textarea id="event_notes_input" placeholder="Optional details" class="window_input event_notes"></textarea>
+					<span id="event_error" class="error" aria-live="polite"> </span>
+					<div class="btns_wrap event_btns">
+						<button id="event_cancel_btn" class="cancel_btn" type="button">Cancel</button>
+						<button id="event_add_btn" class="create_btn" type="button">Add Event</button>
+					</div>
+				</div>
+			</div>
+			<div id="date_picker_box" class="window_box date_picker_overlay">
+				<div class="window date_picker_window" role="dialog" aria-modal="true" aria-labelledby="date_picker_month">
+					<div class="date_picker_header">
+						<button id="date_picker_prev" class="date_picker_nav" type="button" aria-label="Previous month">&lt;</button>
+						<h2 id="date_picker_month"></h2>
+						<button id="date_picker_next" class="date_picker_nav" type="button" aria-label="Next month">&gt;</button>
+					</div>
+					<div id="date_picker_grid" class="date_picker_grid"></div>
+					<div class="date_picker_actions">
+						<button id="date_picker_clear" class="cancel_btn" type="button">Clear</button>
+						<div class="date_picker_actions_right">
+							<button id="date_picker_cancel" class="cancel_btn" type="button">Cancel</button>
+							<button id="date_picker_today" class="create_btn" type="button">Today</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="group_assign_box" class="window_box">
+				<div class="window form_window" role="dialog" aria-modal="true" aria-labelledby="group_assign_title">
+					<h2 id="group_assign_title">Add to Group</h2>
+					<p class="group_assign_hint">Check every group this task belongs to.</p>
+					<div id="group_assign_checklist" class="group_assign_checklist" role="group" aria-label="Task groups"></div>
+					<div class="btns_wrap modal_btns">
+						<button id="group_assign_cancel" class="cancel_btn" type="button">Cancel</button>
+						<button id="group_assign_save" class="create_btn" type="button">Save Groups</button>
+					</div>
+				</div>
+			</div>
+			<div id="rn_box" class="window_box">
+				<div id="rn_window" class="window">
+					<h2>Rename Group</h2>
+					<input id="rn_input" placeholder="Group Name" class="window_input">
+					<span id="rn_error" class="error"> </span>
+					<div class="btns_wrap">
+						<button id="rncancel_btn" class="cancel_btn">Cancel</button>
+						<button id="rnrename_btn" class="create_btn">Rename</button>
+					</div>
+				</div>
+			</div>
+			<div id="al_box" class="window_box">
+				<div id="al_window" class="window">
+					<h2>Delete?</h2>
+					<div class="btns_wrap">
+						<button id="alcancel_btn" class="cancel_btn">Cancel</button>
+						<button id="aldelete_btn" class="delete_btn">Delete</button>
+					</div>
+				</div>
+			</div>
+			<div id="account_settings_box" class="window_box">
+				<section class="window account_settings_window" role="dialog" aria-modal="true" aria-labelledby="account_settings_title">
+					<div class="account_settings_header">
+						<h2 id="account_settings_title">Account settings</h2>
+						<button id="account_settings_close" class="account_settings_close" type="button" aria-label="Close settings"><img class="symbol_icon" src="Images/icon-close.svg" alt="" aria-hidden="true"></button>
+					</div>
+					<div class="account_settings_scroll_wrap">
+						<div id="account_settings_scroll_area" class="account_settings_scroll_area">
+					<form id="username_form" class="account_settings_section">
+						<h3>Change username</h3>
+						<label class="modal_label" for="settings_username">New username</label>
+						<input id="settings_username" class="window_input" type="text" minlength="3" maxlength="24" autocomplete="username" required>
+						<label class="modal_label" for="username_current_password">Current password</label>
+						<input id="username_current_password" class="window_input" type="password" autocomplete="current-password" required>
+						<p id="username_error" class="account_settings_message" aria-live="polite"></p>
+						<button class="create_btn" type="submit">Save username</button>
+					</form>
+					<form id="password_form" class="account_settings_section">
+						<h3>Change password</h3>
+						<label class="modal_label" for="password_current_password">Current password</label>
+						<input id="password_current_password" class="window_input" type="password" autocomplete="current-password" required>
+						<label class="modal_label" for="settings_new_password">New password</label>
+						<input id="settings_new_password" class="window_input" type="password" minlength="8" autocomplete="new-password" required>
+						<label class="modal_label" for="settings_confirm_password">Confirm new password</label>
+						<input id="settings_confirm_password" class="window_input" type="password" minlength="8" autocomplete="new-password" required>
+						<p id="password_error" class="account_settings_message" aria-live="polite"></p>
+						<button class="create_btn" type="submit">Save password</button>
+					</form>
+					<form id="delete_account_form" class="account_settings_section account_danger_section">
+						<h3>Delete account</h3>
+						<p>This permanently deletes this account and its saved tasks, events, groups, and memos from this browser.</p>
+						<label class="modal_label" for="delete_current_password">Current password</label>
+						<input id="delete_current_password" class="window_input" type="password" autocomplete="current-password" required>
+						<p id="delete_account_error" class="account_settings_message" aria-live="polite"></p>
+						<button class="delete_btn" type="submit">Delete account</button>
+					</form>
+						</div>
+						<div id="account_settings_scrollbar" class="account_settings_scrollbar" aria-hidden="true"><div id="account_settings_scroll_thumb" class="account_settings_scroll_thumb"></div></div>
+					</div>
+				</section>
+			</div>
+		</div>
+		</div>
+		<script src="JS/Home.js"></script>
+	</body>
+</html>
